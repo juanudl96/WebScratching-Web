@@ -9,6 +9,7 @@ Client web per www.packtpub.com/packt/offers/free-learning
 
 import urllib2
 from bs4 import BeautifulSoup
+import subprocess
 
 #TODO: coses a fer
 #FIXME: coses a arreglar
@@ -46,7 +47,9 @@ class Client(object):
         #imprimir resultats sense salts de linea
         # resultat = self.borrar_caracters(resultat)
 
-        print resultat
+
+        subprocess.Popen(['notify-send', resultat])
+
 
 if __name__=="__main__":
     client=Client()
