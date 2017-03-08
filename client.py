@@ -26,17 +26,26 @@ class Client(object):
     #buscar el text
     def search_text(self,html):
         soup = BeautifulSoup(html, 'html.parser')
-        elements = soup.find_all("div" , "dotd-title")
-        resultats = []
-        for element in elements:
-            title = element.find("h2")
-            resultats.append(title)
-        return resultats
+        elements = soup.find("div" , "dotd-title")
+        resultats = elements.find("h2")
+        #for element in elements:
+        #    title = element.find("h2")
+        #    resultats.append(title)
+        return resultats.text if resultats else "Error"
+
+    # def borrar_caracters(self,resultats):
+    #    BORRAR = ['\n','\t']
+    #    for caracter in BORRAR:
+    #        resultats = resultats.replace(caracter,"")
+    #    return text
 
     def main(self):
         web = self.get_web('https://www.packtpub.com/packt/offers/free-learning')
         resultat = self.search_text(web)
-        #imprimir resultats
+        resultat = resultat.replace("\n","").replace("\t","")
+        #imprimir resultats sense salts de linea
+        # resultat = self.borrar_caracters(resultat)
+
         print resultat
 
 if __name__=="__main__":
